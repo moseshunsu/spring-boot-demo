@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -34,4 +35,17 @@ public class ProductService {
     public List<Product> fetchAllProducts() {
         return productRepository.findAll();
     }
+
+    public Optional<Product> fetchProductById(Long productId) {
+        return productRepository.findById(productId);
+    }
+
+    public Product fetchProductByName(String productName) {
+        boolean isProductExist = productRepository.existsByName(productName);
+
+        if(isProductExist) {
+            return productRepository.findByName(productName);
+        } else return null;
+    }
+
 }

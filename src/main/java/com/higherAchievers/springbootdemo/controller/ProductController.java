@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/product")
@@ -23,5 +24,19 @@ public class ProductController {
     public List<Product> fetchAllProducts() {
         return productService.fetchAllProducts();
     }
+
+    @GetMapping("/{productId}")
+    public Optional<Product> fetchProductById(@PathVariable(value = "productId") Long productId) {
+        return productService.fetchProductById(productId);
+    }
+
+    @GetMapping("/productName")
+    public Product fetchProductByName(@RequestParam("productName") String productName) {
+        return productService.fetchProductByName(productName);
+    }
+//    @GetMapping("/{productName}")
+//    public Product fetchProductByName(@PathVariable(value = "productName") String productName) {
+//        return productService.fetchProductByName(productName);
+//    }
 
 }
